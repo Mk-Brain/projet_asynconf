@@ -1,10 +1,18 @@
 import 'package:asynconf/Screens/event_screen.dart';
-import 'package:asynconf/widgets/appbar.dart';
+//import 'package:asynconf/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 import 'Screens/add_even_page.dart';
 import 'Screens/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MyApp());
 }
 
