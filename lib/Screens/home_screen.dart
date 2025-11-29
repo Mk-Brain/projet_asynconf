@@ -15,7 +15,7 @@ class Acceuil extends StatelessWidget {
             children: [
               Spacer(),
               Image.asset(
-                "assets/images/logo1.jpg",
+                "assets/images/logo.jpeg",
                 width: 140,
                 height: 140,
                 //color: Colors.blue,
