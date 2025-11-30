@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class AddEvenPage extends StatefulWidget {
@@ -125,14 +127,14 @@ class _AddEvenPageState extends State<AddEvenPage> {
                   side: BorderSide(color: Colors.blue);
                   final DateTime? picked = await showDatePicker(
                     context: context,
-                    initialDate: DateTime.now(),
+                    initialDate: DateTime.timestamp(),
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2035),
                   );
 
                   if (picked != null) {
                     setState(() {
-                      _dateconf ="${picked.day}/${picked.month}/${picked.year}";
+                      _dateconf ="${picked.toString()}";
                     });
                   }
 
@@ -164,11 +166,21 @@ class _AddEvenPageState extends State<AddEvenPage> {
                   FocusScope.of(context).unfocus();
                   if (_formKey.currentState!.validate()) {
                     final confname = confNameController.text;
-                    final seakername = speakerNameController.text;
+                    final speakername = speakerNameController.text;
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Envoi en cours ...")),
                     );
                     FocusScope.of(context).requestFocus(FocusNode());
+
+                    //ajout dans la bd
+                    CollectionReference enventsRef = FirebaseFirestore.instance.collection('Events');
+                    enventsRef.add({
+                      "speaker" : speakername,
+                      "subject" : confname,
+                      "date" : _dateconf,
+                        "type" : selectedconftype,
+                      "avatar" : "jin"
+                    });
                   }
                 },
                 child: Text("Envoyer", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
