@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             centerTitle: true,
             titleTextStyle: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
-          body: [Acceuil(), Event(), AddEvenPage()][_currentindex],
+          body: [Acceuil(), EventPage(), AddEvenPage()][_currentindex],
           bottomNavigationBar: BottomNavigationBar(
             elevation: 30,
             selectedItemColor: Colors.blue,
